@@ -5,6 +5,8 @@ import org.springframework.ui.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.*;
+
 @Controller
 public class SimpleController {
 
@@ -15,7 +17,8 @@ public class SimpleController {
 
     @RequestMapping("/data")
     public String withData(Model model) {
-        model.addAttribute("data", "DataSample");
+        List<String> data = Arrays.asList("Meat", "Milk", "Beer", "Bread");
+        model.addAttribute("data", data);
         return "datatable";
     }
 
