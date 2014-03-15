@@ -1,16 +1,35 @@
 package none.rg.springblank.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import org.springframework.stereotype.*;
 
 import java.util.*;
+import javax.sql.DataSource;
 
 import none.rg.springblank.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 @Repository
-public class GroupDaoImpl implements GroupDao {
-
+public class GroupDaoImpl extends JdbcDaoSupport implements GroupDao {
+    
+    @Autowired
+    public GroupDaoImpl(DataSource ds) {
+        setDataSource(ds);
+    }
+    
+    private RowMapper<Group> rowMapper = new RowMapper() {
+        @Override
+        public Object mapRow(ResultSet rs, int i) throws SQLException {
+            return newGroup(rs.getInt("id"), rs.getString("name"));
+        }
+    };
+    
     public List<Group> getList() {
-        return Arrays.asList(newGroup(1, "Grocery"), newGroup(2, "Drinks"));
+        return getJdbcTemplate().query(
+                "select * from groups", rowMapper);
     }
     
     private Group newGroup(Integer id, String name) {
@@ -19,6 +38,5 @@ public class GroupDaoImpl implements GroupDao {
         g.setName(name);
         return g;
     }
-
+    
 }
-
