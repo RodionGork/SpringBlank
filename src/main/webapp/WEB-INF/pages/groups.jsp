@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <h2>Product Groups</h2>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered table-hover">
         <tr>
             <th>#</th>
             <th>Name</th>
