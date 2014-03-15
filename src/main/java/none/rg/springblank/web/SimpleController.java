@@ -22,11 +22,11 @@ public class SimpleController {
         return "index";
     }
 
-    @RequestMapping("/data")
+    @RequestMapping("/groups")
     public String withData(Model model) {
         List<Group> data = groupService.getList();
-        model.addAttribute("data", data);
-        return "datatable";
+        model.addAttribute("groupList", data);
+        return "groups";
     }
 
 }
