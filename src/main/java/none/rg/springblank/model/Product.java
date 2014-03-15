@@ -5,6 +5,7 @@ public class Product {
     private Integer id;
     private String name;
     private Integer groupId;
+    private Integer price;
     
     public void setId(Integer id) {
         this.id = id;
@@ -28,6 +29,14 @@ public class Product {
     
     public Integer getGroupId() {
         return groupId;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getPrice() {
+        return price;
     }
     
 }

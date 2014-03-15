@@ -27,6 +27,13 @@ public class GroupDaoImpl extends JdbcDaoSupport implements GroupDao {
         }
     };
     
+    @Override
+    public Group getById(int groupId) {
+        return getJdbcTemplate().queryForObject(
+                "select * from groups where id = ?", rowMapper, groupId);
+    }
+    
+    @Override
     public List<Group> getList() {
         return getJdbcTemplate().query(
                 "select * from groups", rowMapper);

@@ -17,6 +17,10 @@ public class GroupService {
     public List<Group> getList() {
         return groupDao.getList();
     }
+    
+    public Group getById(int id) {
+        return groupDao.getById(id);
+    }
 
 }
 

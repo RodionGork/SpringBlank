@@ -9,6 +9,8 @@ import none.rg.springblank.model.*;
 public interface GroupDao {
 
     public List<Group> getList();
+    
+    public Group getById(int id);
 
 }
 

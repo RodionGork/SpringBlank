@@ -15,7 +15,12 @@
     <c:forEach items="${groupList}" var="group">
         <tr>
             <td><c:out value="${group.id}"/></td>
-            <td><c:out value="${group.name}"/></td>
+            <td>
+                <c:url value="/products" var="urlProducts">
+                    <c:param name="g" value="${group.id}"/>
+                </c:url>
+                <a href="${urlProducts}"><c:out value="${group.name}"/></a>
+            </td>
         </tr>
     </c:forEach>
     </table>
