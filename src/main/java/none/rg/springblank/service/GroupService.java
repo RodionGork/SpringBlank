@@ -12,14 +12,14 @@ import none.rg.springblank.model.*;
 public class GroupService {
     
     @Autowired
-    private GroupDao groupDao;
+    private ShelfRepository groupRepo;
     
-    public List<Group> getList() {
-        return groupDao.getList();
+    public List<Shelf> getList() {
+        return groupRepo.findAll();
     }
     
-    public Group getById(int id) {
-        return groupDao.getById(id);
+    public Shelf getById(int id) {
+        return groupRepo.findOne(id);
     }
 
 }

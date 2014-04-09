@@ -3,8 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
     xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
 	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     
     <mvc:annotation-driven/>
@@ -18,11 +20,14 @@
         <property name="suffix"><value>.jsp</value></property>
     </bean>
     
-    <bean id="dataSource"
-            class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:tcp://localhost:12345/~/shop"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
+    <mongo:mongo id="mongo"/>
+    <mongo:db-factory id="mongoDbFactory" host="localhost" port="21017" dbname="shop" mongo-ref="mongo" username="guest" password="guestpwd"/>
+
+    <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <constructor-arg ref="mongoDbFactory"/>
+        <constructor-arg ref="mongoConvertor"/>
     </bean>
+
+    <mongo:repositories base-package="none.rg.*"/>
+
 </beans>

@@ -15,14 +15,14 @@
             <th>#</th>
             <th>Name</th>
         </tr>
-    <c:forEach items="${groupList}" var="group">
+    <c:forEach items="${shelfList}" var="shelf">
         <tr>
-            <td><c:out value="${group.id}"/></td>
+            <td><c:out value="${shelf.id}"/></td>
             <td>
                 <c:url value="/products" var="urlProducts">
-                    <c:param name="g" value="${group.id}"/>
+                    <c:param name="g" value="${shelf.id}"/>
                 </c:url>
-                <a href="${urlProducts}"><c:out value="${group.name}"/></a>
+                <a href="${urlProducts}"><c:out value="${shelf.name}"/></a>
             </td>
         </tr>
     </c:forEach>

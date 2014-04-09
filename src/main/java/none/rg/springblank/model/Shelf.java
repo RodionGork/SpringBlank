@@ -1,8 +1,12 @@
 package none.rg.springblank.model;
 
-public class Group {
+import org.springframework.data.annotation.Id;
 
+public class Shelf {
+
+    @Id
     private Integer id;
+
     private String name;
     
     public void setId(Integer id) {

@@ -3,7 +3,6 @@ package none.rg.springblank.web;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
-import org.springframework.web.servlet.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -27,8 +26,8 @@ public class SimpleController {
 
     @RequestMapping("/groups")
     public String getGroups(Model model) {
-        List<Group> data = groupService.getList();
-        model.addAttribute("groupList", data);
+        List<Shelf> data = groupService.getList();
+        model.addAttribute("shelfList", data);
         return "groups";
     }
     
@@ -36,10 +35,18 @@ public class SimpleController {
     public String getProducts(
             @RequestParam(value="g", required=true) Integer groupId,
             Model model) {
-        Group group = groupService.getById(groupId);
+        Shelf group = groupService.getById(groupId);
         List<Product> data = productService.getList(groupId);
         model.addAttribute("productList", data);
-        model.addAttribute("groupName", group.getName());
+        model.addAttribute("group", group);
         return "products";
+    }
+
+    @RequestMapping("/addprod")
+    public String addProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
+            @RequestParam("price") Integer price, @RequestParam("groupid") Integer groupId,
+            Model model) {
+        productService.addProduct(id, name, price, groupId);
+        return "redirect:products?g=" + groupId;
     }
 }

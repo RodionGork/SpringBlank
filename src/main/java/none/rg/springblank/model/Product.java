@@ -23,11 +23,11 @@ public class Product {
         return name;
     }
     
-    public void setGroupId(Integer id) {
+    public void setShelf(Integer id) {
         this.groupId = id;
     }
     
-    public Integer getGroupId() {
+    public Integer getShelfId() {
         return groupId;
     }
 

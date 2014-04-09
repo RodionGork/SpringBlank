@@ -9,7 +9,9 @@
 </head>
 <body>
 <div class="container">
-    <h2>Product List: ${groupName}</h2>
+    <h2>Product List: ${group.name}</h2>
+    <c:url var="backUrl" value="/groups"/>
+    <div><a href="${backUrl}">back to groups</a></div>
     <table class="table table-striped">
         <tr>
             <th>#</th>
@@ -24,6 +26,15 @@
         </tr>
     </c:forEach>
     </table>
+
+    <c:url var="addProductUrl" value="/addprod"/>
+    <form method="post" action="${addProductUrl}">
+        <label>Id:<input type="text" name="id"/></label><br/>
+        <label>Name:<input type="text" name="name"/></label><br/>
+        <label>Price:<input type="text" name="price"/></label><br/>
+        <input type="hidden" name="groupid" value="${group.id}"/>
+        <input type="submit"/>
+    </form>
 </div>
 </body>
 </html>
