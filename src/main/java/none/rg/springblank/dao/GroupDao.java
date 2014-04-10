@@ -1,7 +1,5 @@
 package none.rg.springblank.dao;
 
-import org.springframework.stereotype.*;
-
 import java.util.*;
 
 import none.rg.springblank.model.*;

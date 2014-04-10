@@ -1,36 +1,23 @@
 package none.rg.springblank.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import javax.sql.DataSource;
 import none.rg.springblank.model.Product;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public class ProductDaoImpl extends JdbcDaoSupport implements ProductDao {
-    
-    private RowMapper<Product> rowMapper = new RowMapper<Product>() {
-        @Override
-        public Product mapRow(ResultSet rs, int i) throws SQLException {
-            return newProduct(rs.getInt("id"), rs.getString("name"),
-                    rs.getInt("groupid"), rs.getInt("price"));
-        }
-        
-    };
-    
+public class ProductDaoImpl implements ProductDao {
+
     @Autowired
-    public ProductDaoImpl(DataSource ds) {
-        setDataSource(ds);
-    }
+    private SessionFactory sessionFactory;
 
     @Override
     public List<Product> getList(Integer groupId) {
         if (groupId != null) {
-            return getJdbcTemplate().query("select * from products where groupid = ?", rowMapper, groupId);
+            return sessionFactory.getCurrentSession().createQuery("from Product p where groupId = :g")
+                    .setParameter("g", groupId).list();
         } else {
             throw new UnsupportedOperationException();
         }

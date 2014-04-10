@@ -1,44 +1,34 @@
 package none.rg.springblank.dao;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import org.springframework.stereotype.*;
-
-import java.util.*;
-import javax.sql.DataSource;
-
-import none.rg.springblank.model.*;
+import none.rg.springblank.model.Group;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
-public class GroupDaoImpl extends JdbcDaoSupport implements GroupDao {
-    
-    @Autowired
-    public GroupDaoImpl(DataSource ds) {
-        setDataSource(ds);
+public class GroupDaoImpl implements GroupDao {
+
+    public GroupDaoImpl() {
+        System.err.println("GROUP_DAO INSTANTIATED");
     }
-    
-    private RowMapper<Group> rowMapper = new RowMapper() {
-        @Override
-        public Object mapRow(ResultSet rs, int i) throws SQLException {
-            return newGroup(rs.getInt("id"), rs.getString("name"));
-        }
-    };
-    
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+
     @Override
     public Group getById(int groupId) {
-        return getJdbcTemplate().queryForObject(
-                "select * from groups where id = ?", rowMapper, groupId);
+        return (Group) sessionFactory.getCurrentSession().createQuery("from Group g where id = :id")
+                .setParameter("id", groupId).uniqueResult();
     }
     
     @Override
     public List<Group> getList() {
-        return getJdbcTemplate().query(
-                "select * from groups", rowMapper);
+        return sessionFactory.getCurrentSession().createQuery("from Group g").list();
     }
-    
+
     private Group newGroup(Integer id, String name) {
         Group g = new Group();
         g.setId(id);
