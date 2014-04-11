@@ -38,7 +38,7 @@ public class SimpleController {
         Group group = groupService.getById(groupId);
         List<Product> data = productService.getList(groupId);
         model.addAttribute("productList", data);
-        model.addAttribute("groupName", group.getName());
+        model.addAttribute("group", group);
         return "products";
     }
 
@@ -48,5 +48,13 @@ public class SimpleController {
         Product product = productService.getById(productId);
         model.addAttribute("product", product);
         return "viewproduct";
+    }
+
+    @RequestMapping("/addproduct")
+    public String addProduct(Model model,
+            @RequestParam(value="name") String name, @RequestParam(value="price") Integer price,
+            @RequestParam(value="group") Integer groupId) {
+        groupService.addProduct(name, price, groupId);
+        return "redirect:products?g=" + groupId;
     }
 }

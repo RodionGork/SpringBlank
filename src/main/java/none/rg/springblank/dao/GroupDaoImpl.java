@@ -22,7 +22,12 @@ public class GroupDaoImpl implements GroupDao {
         return (Group) sessionFactory.getCurrentSession().createQuery("from Group g where id = :id")
                 .setParameter("id", groupId).uniqueResult();
     }
-    
+
+    @Override
+    public void save(Group g) {
+        sessionFactory.getCurrentSession().saveOrUpdate(g);
+    }
+
     @Override
     public List<Group> getList() {
         return sessionFactory.getCurrentSession().createQuery("from Group g").list();

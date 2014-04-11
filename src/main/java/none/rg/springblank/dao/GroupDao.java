@@ -1,8 +1,8 @@
 package none.rg.springblank.dao;
 
-import java.util.*;
+import none.rg.springblank.model.Group;
 
-import none.rg.springblank.model.*;
+import java.util.List;
 
 public interface GroupDao {
 
@@ -10,5 +10,6 @@ public interface GroupDao {
     
     public Group getById(int id);
 
+    void save(Group g);
 }
 

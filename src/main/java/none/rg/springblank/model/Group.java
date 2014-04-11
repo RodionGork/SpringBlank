@@ -13,7 +13,7 @@ public class Group {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<Product> products;
 
     public void setId(Integer id) {

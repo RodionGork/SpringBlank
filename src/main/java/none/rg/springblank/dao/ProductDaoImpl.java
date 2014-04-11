@@ -5,6 +5,8 @@ import none.rg.springblank.model.Product;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
@@ -15,6 +17,11 @@ public class ProductDaoImpl implements ProductDao {
     public Product getById(int id) {
         return (Product) sessionFactory.getCurrentSession().createQuery("from Product p where id = :id")
                 .setParameter("id", id).uniqueResult();
+    }
+
+    @Override
+    public void save(Product p) {
+        sessionFactory.getCurrentSession().saveOrUpdate(p);
     }
 
     private Product newProduct(Integer id, String name, Group group, Integer price) {
