@@ -11,7 +11,6 @@ import java.util.List;
 public class GroupDaoImpl implements GroupDao {
 
     public GroupDaoImpl() {
-        System.err.println("GROUP_DAO INSTANTIATED");
     }
 
     @Autowired
