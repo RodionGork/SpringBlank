@@ -1,9 +1,6 @@
 package none.rg.springblank.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="products")
@@ -15,8 +12,9 @@ public class Product {
     @Column
     private String name;
 
-    @Column
-    private Integer groupId;
+    @ManyToOne
+    @JoinColumn(name = "groupid")
+    private Group group;
 
     @Column
     private Integer price;
@@ -37,12 +35,12 @@ public class Product {
         return name;
     }
     
-    public void setGroupId(Integer id) {
-        this.groupId = id;
+    public void setGroup(Group g) {
+        group = g;
     }
     
-    public Integer getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
     public void setPrice(Integer price) {

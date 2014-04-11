@@ -1,9 +1,7 @@
 package none.rg.springblank.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="groups")
@@ -14,7 +12,10 @@ public class Group {
 
     @Column
     private String name;
-    
+
+    @OneToMany(mappedBy = "group")
+    private List<Product> products;
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -29,6 +30,14 @@ public class Group {
     
     public String getName() {
         return name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
 }
