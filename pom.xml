@@ -2,10 +2,10 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>none.rg.springblank</groupId>
-    <artifactId>springblank</artifactId>
+    <artifactId>mongoshop</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>spring-blank Maven Webapp</name>
+    <name>Mongo with Spring-data demo shop Maven Webapp</name>
     <url>http://github.com/rodiongork/springblank</url>
 
     <properties>
@@ -30,14 +30,9 @@
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.175</version>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.4.1.RELEASE</version>
         </dependency>
     </dependencies>
 
